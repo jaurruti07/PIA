@@ -1287,6 +1287,19 @@
             .card-actions { flex-direction: column; }
             .dir-grid.list-view .dir-card .card-actions { flex-direction: column; }
         }
+        .about-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-top: 2rem;
+}
+.about-features img {
+    grid-column: 1 / -1; /* Ocupa toda la fila */
+    width: 100%;
+    max-width: 500px; /* o el tamaño que quieras */
+    margin: 0 auto;
+    display: block;
+}
     </style>
 </head>
 <body>
