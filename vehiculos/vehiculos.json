@@ -1,0 +1,442 @@
+[
+  {
+    "id": 1,
+    "placa": "O-1001BB",
+    "tipo_placa": "O",
+    "institucion": {
+      "nombre": "Ministerio de Finanzas Públicas",
+      "siglas": "MINFIN",
+      "tipo": "Ministerio",
+      "dependencia": "Ministerio de Finanzas Públicas"
+    },
+    "uso_autorizado": "Trámites oficiales",
+    "vehiculo": {
+      "marca": "Toyota",
+      "modelo": "Hilux",
+      "color": "Azul",
+      "anio": 2022
+    },
+    "estado": "Activo",
+    "iscv": "Al día",
+    "multas_transito": "Sin multas",
+    "ultima_actualizacion": "2024-02-26T10:30:00"
+  },
+  {
+    "id": 2,
+    "placa": "O-1002BB",
+    "tipo_placa": "O",
+    "institucion": {
+      "nombre": "Ministerio de Salud Pública y Asistencia Social",
+      "siglas": "MSPAS",
+      "tipo": "Ministerio",
+      "dependencia": "Hospital General San Juan de Dios"
+    },
+    "uso_autorizado": "Servicios médicos",
+    "vehiculo": {
+      "marca": "Toyota",
+      "modelo": "Hilux",
+      "color": "Blanco",
+      "anio": 2021
+    },
+    "estado": "Activo",
+    "iscv": "Al día",
+    "multas_transito": "Sin multas",
+    "ultima_actualizacion": "2024-03-01T08:15:00"
+  },
+  {
+    "id": 3,
+    "placa": "O-1003BB",
+    "tipo_placa": "O",
+    "institucion": {
+      "nombre": "Ministerio de Educación",
+      "siglas": "MINEDUC",
+      "tipo": "Ministerio",
+      "dependencia": "Dirección Departamental Guatemala Norte"
+    },
+    "uso_autorizado": "Supervisión educativa",
+    "vehiculo": {
+      "marca": "Nissan",
+      "modelo": "Frontier",
+      "color": "Gris",
+      "anio": 2023
+    },
+    "estado": "Activo",
+    "iscv": "Al día",
+    "multas_transito": "1 multa pendiente",
+    "ultima_actualizacion": "2024-03-05T11:20:00"
+  },
+  {
+    "id": 4,
+    "placa": "O-1004BB",
+    "tipo_placa": "O",
+    "institucion": {
+      "nombre": "Ministerio de Gobernación",
+      "siglas": "MINGOB",
+      "tipo": "Ministerio",
+      "dependencia": "Dirección General de la PNC"
+    },
+    "uso_autorizado": "Seguridad",
+    "vehiculo": {
+      "marca": "Ford",
+      "modelo": "Ranger",
+      "color": "Azul",
+      "anio": 2022
+    },
+    "estado": "Activo",
+    "iscv": "Al día",
+    "multas_transito": "Sin multas",
+    "ultima_actualizacion": "2024-03-10T14:40:00"
+  },
+  {
+    "id": 5,
+    "placa": "O-1005BB",
+    "tipo_placa": "O",
+    "institucion": {
+      "nombre": "Ministerio de Agricultura, Ganadería y Alimentación",
+      "siglas": "MAGA",
+      "tipo": "Ministerio",
+      "dependencia": "Dirección de Desarrollo Agrícola"
+    },
+    "uso_autorizado": "Inspecciones de campo",
+    "vehiculo": {
+      "marca": "Mitsubishi",
+      "modelo": "L200",
+      "color": "Blanco",
+      "anio": 2020
+    },
+    "estado": "Activo",
+    "iscv": "Pendiente",
+    "multas_transito": "Sin multas",
+    "ultima_actualizacion": "2024-03-12T09:10:00"
+  },
+  {
+    "id": 6,
+    "placa": "O-1006BB",
+    "tipo_placa": "O",
+    "institucion": {
+      "nombre": "Ministerio de Ambiente y Recursos Naturales",
+      "siglas": "MARN",
+      "tipo": "Ministerio",
+      "dependencia": "Dirección Ambiental"
+    },
+    "uso_autorizado": "Inspecciones ambientales",
+    "vehiculo": {
+      "marca": "Toyota",
+      "modelo": "Fortuner",
+      "color": "Verde",
+      "anio": 2021
+    },
+    "estado": "Activo",
+    "iscv": "Al día",
+    "multas_transito": "2 multas pagadas",
+    "ultima_actualizacion": "2024-03-15T16:00:00"
+  },
+  {
+    "id": 7,
+    "placa": "O-1007BB",
+    "tipo_placa": "O",
+    "institucion": {
+      "nombre": "Ministerio de Economía",
+      "siglas": "MINECO",
+      "tipo": "Ministerio",
+      "dependencia": "Viceministerio PYMES"
+    },
+    "uso_autorizado": "Comisiones oficiales",
+    "vehiculo": {
+      "marca": "Hyundai",
+      "modelo": "Tucson",
+      "color": "Plateado",
+      "anio": 2022
+    },
+    "estado": "Activo",
+    "iscv": "Al día",
+    "multas_transito": "Sin multas",
+    "ultima_actualizacion": "2024-03-18T10:30:00"
+  },
+  {
+    "id": 8,
+    "placa": "O-1008BB",
+    "tipo_placa": "O",
+    "institucion": {
+      "nombre": "Ministerio de Cultura y Deportes",
+      "siglas": "MCD",
+      "tipo": "Ministerio",
+      "dependencia": "Dirección General del Deporte"
+    },
+    "uso_autorizado": "Actividades institucionales",
+    "vehiculo": {
+      "marca": "Isuzu",
+      "modelo": "D-Max",
+      "color": "Blanco",
+      "anio": 2021
+    },
+    "estado": "Activo",
+    "iscv": "Al día",
+    "multas_transito": "Sin multas",
+    "ultima_actualizacion": "2024-03-20T13:45:00"
+  },
+  {
+    "id": 9,
+    "placa": "O-1009BB",
+    "tipo_placa": "O",
+    "institucion": {
+      "nombre": "Ministerio de Trabajo y Previsión Social",
+      "siglas": "MINTRAB",
+      "tipo": "Ministerio",
+      "dependencia": "Inspección General de Trabajo"
+    },
+    "uso_autorizado": "Inspecciones laborales",
+    "vehiculo": {
+      "marca": "Toyota",
+      "modelo": "Corolla",
+      "color": "Gris",
+      "anio": 2020
+    },
+    "estado": "Activo",
+    "iscv": "Al día",
+    "multas_transito": "Sin multas",
+    "ultima_actualizacion": "2024-03-22T08:40:00"
+  },
+  {
+    "id": 10,
+    "placa": "O-1010BB",
+    "tipo_placa": "O",
+    "institucion": {
+      "nombre": "Secretaría de Planificación y Programación de la Presidencia",
+      "siglas": "SEGEPLAN",
+      "tipo": "Secretaría",
+      "dependencia": "Dirección de Planificación"
+    },
+    "uso_autorizado": "Comisiones oficiales",
+    "vehiculo": {
+      "marca": "Mazda",
+      "modelo": "BT-50",
+      "color": "Azul",
+      "anio": 2022
+    },
+    "estado": "Activo",
+    "iscv": "Al día",
+    "multas_transito": "Sin multas",
+    "ultima_actualizacion": "2024-03-24T12:20:00"
+  },
+  {
+    "id": 11,
+    "placa": "O-1011BB",
+    "tipo_placa": "O",
+    "institucion": {
+      "nombre": "Consejo Nacional de Áreas Protegidas",
+      "siglas": "CONAP",
+      "tipo": "Otras Dependencias",
+      "dependencia": "Región Petén"
+    },
+    "uso_autorizado": "Protección ambiental",
+    "vehiculo": {
+      "marca": "Toyota",
+      "modelo": "Hilux",
+      "color": "Verde",
+      "anio": 2023
+    },
+    "estado": "Activo",
+    "iscv": "Al día",
+    "multas_transito": "Sin multas",
+    "ultima_actualizacion": "2024-03-26T15:30:00"
+  },
+  {
+    "id": 12,
+    "placa": "O-1012BB",
+    "tipo_placa": "O",
+    "institucion": {
+      "nombre": "Oficina Nacional de Servicio Civil",
+      "siglas": "ONSEC",
+      "tipo": "Otras Dependencias",
+      "dependencia": "Dirección General"
+    },
+    "uso_autorizado": "Gestiones administrativas",
+    "vehiculo": {
+      "marca": "Chevrolet",
+      "modelo": "Colorado",
+      "color": "Blanco",
+      "anio": 2021
+    },
+    "estado": "Activo",
+    "iscv": "Pendiente",
+    "multas_transito": "Sin multas",
+    "ultima_actualizacion": "2024-03-28T09:00:00"
+  },
+  {
+    "id": 13,
+    "placa": "O-1013BB",
+    "tipo_placa": "O",
+    "institucion": {
+      "nombre": "Gobernación Departamental de Guatemala",
+      "siglas": "GDG",
+      "tipo": "Gobernación Departamental",
+      "dependencia": "Despacho del Gobernador"
+    },
+    "uso_autorizado": "Actividades oficiales",
+    "vehiculo": {
+      "marca": "Toyota",
+      "modelo": "Hilux",
+      "color": "Negro",
+      "anio": 2022
+    },
+    "estado": "Activo",
+    "iscv": "Al día",
+    "multas_transito": "Sin multas",
+    "ultima_actualizacion": "2024-04-01T11:00:00"
+  },
+  {
+    "id": 14,
+    "placa": "O-1014BB",
+    "tipo_placa": "O",
+    "institucion": {
+      "nombre": "Gobernación Departamental de Escuintla",
+      "siglas": "GDE",
+      "tipo": "Gobernación Departamental",
+      "dependencia": "Área Administrativa"
+    },
+    "uso_autorizado": "Supervisión",
+    "vehiculo": {
+      "marca": "Nissan",
+      "modelo": "Frontier",
+      "color": "Blanco",
+      "anio": 2021
+    },
+    "estado": "Activo",
+    "iscv": "Al día",
+    "multas_transito": "1 multa pagada",
+    "ultima_actualizacion": "2024-04-02T09:50:00"
+  },
+  {
+    "id": 15,
+    "placa": "O-1015BB",
+    "tipo_placa": "O",
+    "institucion": {
+      "nombre": "Comisión Nacional Contra la Corrupción",
+      "siglas": "CNC",
+      "tipo": "Dependencia Temporal",
+      "dependencia": "Dirección Ejecutiva"
+    },
+    "uso_autorizado": "Investigaciones",
+    "vehiculo": {
+      "marca": "Toyota",
+      "modelo": "Hilux",
+      "color": "Azul",
+      "anio": 2024
+    },
+    "estado": "Activo",
+    "iscv": "Al día",
+    "multas_transito": "Sin multas",
+    "ultima_actualizacion": "2024-04-03T16:30:00"
+  },
+  {
+    "id": 16,
+    "placa": "O-1016BB",
+    "tipo_placa": "O",
+    "institucion": {
+      "nombre": "Ministerio de Comunicaciones, Infraestructura y Vivienda",
+      "siglas": "MICIVI",
+      "tipo": "Ministerio",
+      "dependencia": "Dirección General de Caminos"
+    },
+    "uso_autorizado": "Supervisión de obras",
+    "vehiculo": {
+      "marca": "Ford",
+      "modelo": "Ranger",
+      "color": "Amarillo",
+      "anio": 2023
+    },
+    "estado": "Activo",
+    "iscv": "Al día",
+    "multas_transito": "Sin multas",
+    "ultima_actualizacion": "2024-04-05T10:45:00"
+  },
+  {
+    "id": 17,
+    "placa": "O-1017BB",
+    "tipo_placa": "O",
+    "institucion": {
+      "nombre": "Ministerio de Relaciones Exteriores",
+      "siglas": "MINEX",
+      "tipo": "Ministerio",
+      "dependencia": "Dirección Consular"
+    },
+    "uso_autorizado": "Misiones diplomáticas",
+    "vehiculo": {
+      "marca": "Hyundai",
+      "modelo": "Santa Fe",
+      "color": "Negro",
+      "anio": 2022
+    },
+    "estado": "Activo",
+    "iscv": "Al día",
+    "multas_transito": "Sin multas",
+    "ultima_actualizacion": "2024-04-08T14:15:00"
+  },
+  {
+    "id": 18,
+    "placa": "O-1018BB",
+    "tipo_placa": "O",
+    "institucion": {
+      "nombre": "Ministerio de Energía y Minas",
+      "siglas": "MEM",
+      "tipo": "Ministerio",
+      "dependencia": "Dirección General de Minería"
+    },
+    "uso_autorizado": "Inspecciones técnicas",
+    "vehiculo": {
+      "marca": "Mitsubishi",
+      "modelo": "L200",
+      "color": "Gris",
+      "anio": 2020
+    },
+    "estado": "Inactivo",
+    "iscv": "Vencido",
+    "multas_transito": "2 multas pendientes",
+    "ultima_actualizacion": "2024-04-09T09:20:00"
+  },
+  {
+    "id": 19,
+    "placa": "O-1019BB",
+    "tipo_placa": "O",
+    "institucion": {
+      "nombre": "Ministerio de Desarrollo Social",
+      "siglas": "MIDES",
+      "tipo": "Ministerio",
+      "dependencia": "Dirección de Programas Sociales"
+    },
+    "uso_autorizado": "Trabajo comunitario",
+    "vehiculo": {
+      "marca": "Toyota",
+      "modelo": "Hilux",
+      "color": "Blanco",
+      "anio": 2023
+    },
+    "estado": "Activo",
+    "iscv": "Al día",
+    "multas_transito": "Sin multas",
+    "ultima_actualizacion": "2024-04-10T08:00:00"
+  },
+  {
+    "id": 20,
+    "placa": "O-1020BB",
+    "tipo_placa": "O",
+    "institucion": {
+      "nombre": "Ministerio de la Defensa Nacional",
+      "siglas": "MINDEF",
+      "tipo": "Ministerio",
+      "dependencia": "Comando Logístico"
+    },
+    "uso_autorizado": "Operaciones oficiales",
+    "vehiculo": {
+      "marca": "Toyota",
+      "modelo": "Land Cruiser",
+      "color": "Verde Olivo",
+      "anio": 2024
+    },
+    "estado": "Activo",
+    "iscv": "Al día",
+    "multas_transito": "Sin multas",
+    "ultima_actualizacion": "2024-04-12T13:10:00"
+  }
+]
