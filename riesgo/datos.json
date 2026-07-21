@@ -1,15 +1,15 @@
 {
   "years": {
     "2025": {
+      "estadoRecoleccion": "completado",
       "fechaActualizacion": "2026-05-29",
       "ribbonStats": [
         { "icono": "building", "valor": 68, "etiqueta": "Instituciones" },
-        { "icono": "check-circle", "valor": "19%", "etiqueta": "Cumplen" },
-        { "icono": "loader-2", "valor": "7%", "etiqueta": "En proceso" },
-        { "icono": "alert-triangle", "valor": "74%", "etiqueta": "Pendientes" },
-        { "icono": "star", "valor": "25%", "etiqueta": "Buenas prácticas" },
+        { "icono": "check-circle", "valor": "21%", "etiqueta": "Cumplen" },
+        { "icono": "loader-2", "valor": "79%", "etiqueta": "En proceso" },
+        { "icono": "star", "valor": "25%", "etiqueta": "Buenas prácticas GRC" },
         { "icono": "shield-alt", "valor": "CNC", "etiqueta": "Verificación" },
-        { "icono": "clipboard-list", "valor": "", "etiqueta": "CGC completado" },
+        { "icono": "clipboard-list", "valor": "NO APLICA", "etiqueta": "Verificación hallazgos CGC" },
         { "icono": "clock", "valor": "2025", "etiqueta": "Ciclo activo" }
       ],
       "instituciones": [
@@ -139,7 +139,7 @@
           "nombre": "Ministerio de la Defensa Nacional",
           "sector": "Ministerios",
           "estado": "parcial",
-          "nivel": "Básico",
+          "nivel": "Intermedio",
           "checks": { "identificacion": true, "analisis": true, "presentacion": false },
           "buenasPracticas": false,
           "verificacionCGC": "",
@@ -271,7 +271,7 @@
           "nombre": "Secretaría de Planificación y Programación de la Presidencia",
           "sector": "Secretarías",
           "estado": "parcial",
-          "nivel": "Básico",
+          "nivel": "Intermedio",
           "checks": { "identificacion": true, "analisis": true, "presentacion": false },
           "buenasPracticas": false,
           "verificacionCGC": "",
@@ -282,7 +282,7 @@
           "siglas": "SESAN",
           "nombre": "Secretaría de Seguridad Alimentaria y Nutricional de la Presidencia de la República",
           "sector": "Secretarías",
-          "estado": "parcial",
+          "estado": "no_cumple",
           "nivel": "Básico",
           "checks": { "identificacion": true, "analisis": true, "presentacion": false },
           "buenasPracticas": false,
@@ -367,7 +367,7 @@
           "nombre": "Secretaría Técnica del Consejo Nacional de Seguridad",
           "sector": "Secretarías",
           "estado": "parcial",
-          "nivel": "Básico",
+          "nivel": "Intermedio",
           "checks": { "identificacion": true, "analisis": true, "presentacion": false },
           "buenasPracticas": true,
           "verificacionCGC": "",
@@ -391,7 +391,7 @@
           "nombre": "Autoridad para el Manejo Sustentable de la Cuenca y del Lago de Amatitlán",
           "sector": "Otras dependencias",
           "estado": "parcial",
-          "nivel": "Básico",
+          "nivel": "Intermedio",
           "checks": { "identificacion": true, "analisis": true, "presentacion": false },
           "buenasPracticas": false,
           "verificacionCGC": "",
@@ -499,7 +499,7 @@
           "nombre": "Defensoría de la Mujer Indígena",
           "sector": "Otras dependencias",
           "estado": "parcial",
-          "nivel": "Básico",
+          "nivel": "Intermedio",
           "checks": { "identificacion": true, "analisis": true, "presentacion": false },
           "buenasPracticas": false,
           "verificacionCGC": "",
@@ -535,7 +535,7 @@
           "nombre": "Instituto Nacional de Estudios Estratégicos en Seguridad",
           "sector": "Otras dependencias",
           "estado": "parcial",
-          "nivel": "Básico",
+          "nivel": "Intermedio",
           "checks": { "identificacion": true, "analisis": true, "presentacion": false },
           "buenasPracticas": true,
           "verificacionCGC": "",
@@ -739,7 +739,7 @@
           "nombre": "Gobernación Departamental de Retalhuleu",
           "sector": "Gobernaciones",
           "estado": "parcial",
-          "nivel": "Básico",
+          "nivel": "Intermedio",
           "checks": { "identificacion": true, "analisis": true, "presentacion": false },
           "buenasPracticas": false,
           "verificacionCGC": "",
@@ -832,16 +832,44 @@
       ]
     },
     "2026": {
+      "estadoRecoleccion": "en_proceso",
       "fechaActualizacion": "2026-05-01",
       "ribbonStats": [
         { "icono": "building", "valor": 0, "etiqueta": "Instituciones" },
         { "icono": "check-circle", "valor": "0%", "etiqueta": "Cumplen" },
         { "icono": "loader-2", "valor": "0%", "etiqueta": "En proceso" },
-        { "icono": "alert-triangle", "valor": "0%", "etiqueta": "Pendientes" },
-        { "icono": "star", "valor": "0%", "etiqueta": "Buenas prácticas" },
+        { "icono": "star", "valor": "0%", "etiqueta": "Buenas prácticas GRC" },
         { "icono": "shield-alt", "valor": "CNC", "etiqueta": "Verificación" },
-        { "icono": "clipboard-list", "valor": "0%", "etiqueta": "CGC completado" },
+        { "icono": "clipboard-list", "valor": "0%", "etiqueta": "Verificación hallazgos CGC" },
         { "icono": "clock", "valor": "2026", "etiqueta": "Ciclo activo" }
+      ],
+      "instituciones": []
+    },
+    "2027": {
+      "estadoRecoleccion": "no_iniciado",
+      "fechaActualizacion": "2027-01-01",
+      "ribbonStats": [
+        { "icono": "building", "valor": 0, "etiqueta": "Instituciones" },
+        { "icono": "check-circle", "valor": "0%", "etiqueta": "Cumplen" },
+        { "icono": "loader-2", "valor": "0%", "etiqueta": "En proceso" },
+        { "icono": "star", "valor": "0%", "etiqueta": "Buenas prácticas GRC" },
+        { "icono": "shield-alt", "valor": "CNC", "etiqueta": "Verificación" },
+        { "icono": "clipboard-list", "valor": "0%", "etiqueta": "Verificación hallazgos CGC" },
+        { "icono": "clock", "valor": "2027", "etiqueta": "Ciclo activo" }
+      ],
+      "instituciones": []
+    },
+    "2028": {
+      "estadoRecoleccion": "no_iniciado",
+      "fechaActualizacion": "2028-01-01",
+      "ribbonStats": [
+        { "icono": "building", "valor": 0, "etiqueta": "Instituciones" },
+        { "icono": "check-circle", "valor": "0%", "etiqueta": "Cumplen" },
+        { "icono": "loader-2", "valor": "0%", "etiqueta": "En proceso" },
+        { "icono": "star", "valor": "0%", "etiqueta": "Buenas prácticas GRC" },
+        { "icono": "shield-alt", "valor": "CNC", "etiqueta": "Verificación" },
+        { "icono": "clipboard-list", "valor": "0%", "etiqueta": "Verificación hallazgos CGC" },
+        { "icono": "clock", "valor": "2028", "etiqueta": "Ciclo activo" }
       ],
       "instituciones": []
     }
