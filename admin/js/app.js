@@ -1,4 +1,8 @@
+url: https://raw.githubusercontent.com/jaurruti07/PIA/main/admin/js/app.js
+
 // app.js - Controlador principal del panel
+import { initDatabaseManager } from './database-manager.js';
+
 
 document.addEventListener('DOMContentLoaded', async () => {
     const token = localStorage.getItem('token');
@@ -53,7 +57,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const themeLabel = document.getElementById('themeLabel');
     let darkMode = localStorage.getItem('adminTheme') === 'dark';
     applyTheme(darkMode);
-    themeToggle.addEventListener('click', () => {
+    themeToggle.addEventLi
+stener('click', () => {
         darkMode = !darkMode;
         applyTheme(darkMode);
         localStorage.setItem('adminTheme', darkMode ? 'dark' : 'light');
@@ -100,6 +105,7 @@ async function loadMenuModules() {
         const modules = await getModules();
         const container = document.getElementById('menuModules');
         container.innerHTML = '';
+        modules.push('database');
         modules.forEach(mod => {
             const li = document.createElement('li');
             const a = document.createElement('a');
@@ -116,7 +122,8 @@ async function loadMenuModules() {
 }
 
 async function loadModule(module) {
-    const content = document.getElementById('contentArea');
+  
+  const content = document.getElementById('contentArea');
     const title = document.getElementById('pageTitle');
 
     if (module === 'dashboard') {
@@ -179,7 +186,8 @@ async function loadDashboard() {
         const res = await fetch(`${getApiBase()}/dashboard/stats`, { headers: getHeaders() });
         const stats = await res.json();
 
-        const grid = document.getElementById('statsGrid');
+        const grid = do
+cument.getElementById('statsGrid');
         grid.innerHTML = Object.entries(stats).map(([key, value]) => `
             <div class="stat-card">
                 <div class="label">${capitalize(key)}</div>
@@ -224,7 +232,8 @@ async function loadDashboard() {
         if (audit.length === 0) {
             list.innerHTML = '<p class="text-muted">No hay actividad reciente</p>';
         } else {
-            list.innerHTML = audit.slice(0, 10).map(item => `
+            list.innerHTML = audit.s
+lice(0, 10).map(item => `
                 <div class="activity-item">
                     <span><span class="activity-user">${item.user}</span> ${item.action} en ${item.module}</span>
                     <span class="activity-time">${formatDate(item.timestamp)}</span>
@@ -276,7 +285,8 @@ async function fetchAndRenderTable() {
             </div>
             <div class="table-wrapper">
                 <table>
-                    <thead><tr>${headers.map(h => `<th>${capitalize(h)}</th>`).join('')}<th>Acciones</th></tr></thead>
+             
+       <thead><tr>${headers.map(h => `<th>${capitalize(h)}</th>`).join('')}<th>Acciones</th></tr></thead>
                     <tbody>
                 `;
         if (pageData.length === 0) {
@@ -314,7 +324,8 @@ async function fetchAndRenderTable() {
         document.querySelectorAll('.edit-btn').forEach(btn => {
             btn.addEventListener('click', () => openEditModal(btn.dataset.id));
         });
-        document.querySelectorAll('.delete-btn').forEach(btn => {
+        document.querySelectorAll('.delete-b
+tn').forEach(btn => {
             btn.addEventListener('click', () => deleteRecordHandler(btn.dataset.id));
         });
         document.querySelectorAll('.pagination button').forEach(btn => {
@@ -371,7 +382,8 @@ async function openEditModal(id) {
 function showModal(title, formHtml) {
     document.getElementById('modalTitle').textContent = title;
     document.getElementById('modalBody').innerHTML = formHtml;
-    document.getElementById('modalOverlay').style.display = 'flex';
+    document.getElementById('modalOve
+rlay').style.display = 'flex';
     // Inicializar editores
     initEditors();
     // Configurar guardado
@@ -433,7 +445,8 @@ function exportJson(data) {
 }
 
 function importJson() {
-    const input = document.createElement('input');
+    const input = document.createElem
+ent('input');
     input.type = 'file';
     input.accept = '.json';
     input.onchange = async (e) => {
@@ -488,7 +501,8 @@ function loadBackupManager() {
 }
 
 function loadUserManager() {
-    const content = document.getElementById('usersContent');
+    const content = document.get
+ElementById('usersContent');
     content.innerHTML = `<p>Gestión de usuarios (pendiente)</p>`;
 }
 
