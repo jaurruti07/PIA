@@ -1,3 +1,5 @@
+url: https://raw.githubusercontent.com/jaurruti07/PIA/main/admin/js/utils.js
+
 // utils.js - Utilidades comunes
 
 function capitalize(str) {
@@ -38,6 +40,45 @@ function showToast(message, type = 'info') {
 }
 
 // Si se usa en el admin, añadir estilos de toast al CSS
+
+
+// Funciones para obtener configuración de bases de datos
+export function getDatabaseConfigForPage(pageName) {
+  // Intentar obtener desde localStorage (nueva forma)
+  const stored = localStorage.getItem('pia_db_configurations');
+  if (stored) {
+    try {
+      const config = JSON.parse(stored);
+      const dbId = config.pageDatabaseMap[pageName];
+      if (dbId) {
+        const db = config.databases.find(d => d.id === dbId);
+        if (db) return db;
+      }
+      // Si no encuentra para la página específica, intentar con default
+      if (config.defaultDatabase) {
+        const db = config.databases.find(d => d.id === config.defaultDatabase);
+        if (db) return db;
+      }
+    } catch (e) {
+      console.error('Error parsing DB config:', e);
+    }
+  }
+  
+  // Fallback: intentar leer data_portal.json (forma antigua)
+  // Esto se mantiene por compatibilidad
+  return null;
+}
+
+export function getAllDatabaseConfigs() {
+  const stored = localStorage.getItem('pia_db_configurations');
+  if (!stored) return { databases: [], defaultDatabase: null, pageDatabaseMap: {} };
+  try {
+    return JSON.parse(stored);
+  } catch (e) {
+    console.error('Error parsing DB config:', e);
+    return { databases: [], defaultDatabase: null, pageDatabaseMap: {} };
+  }
+}
 // (se pueden añadir dinámicamente)
 const toastStyles = document.createElement('style');
 toastStyles.textContent = `
@@ -63,4 +104,5 @@ toastStyles.textContent = `
         to { opacity: 1; transform: translateX(-50%) translateY(0); }
     }
 `;
-document.head.appendChild(toastStyles);
+document.head.appendChild(toa
+stStyles);
