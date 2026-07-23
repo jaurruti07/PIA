@@ -1,4 +1,4 @@
-// database-manager.js - Interfaz de administración de bases de datos
+// database-manager.js - Interfaz de administración de bases de datos y datos mock
 
 import { 
   getDbConfig, saveDbConfig, getAllDatabases, addDatabase, 
@@ -17,10 +17,22 @@ const AVAILABLE_PAGES = [
   'index'
 ];
 
+// Archivos JSON disponibles
+const AVAILABLE_JSON_FILES = [
+  { path: '/data_portal.json', name: 'data_portal.json', label: 'Portal Principal' },
+  { path: '/canales-por-la-integridad/data_directorio.json', name: 'data_directorio.json', label: 'Canales x Integridad' },
+  { path: '/directorio/data_acceso.json', name: 'data_acceso.json', label: 'Directorio Ejecutivo' },
+  { path: '/gobierno_en_numeros/data_tableros.json', name: 'data_tableros.json', label: 'Gobierno en Números' }
+];
+
+let currentDbId = null;
+let currentJsonPath = null;
+
 // Inicializar el módulo
 export async function initDatabaseManager() {
   renderDatabaseManager();
   setupEventListeners();
+  initMockDataTab();
 }
 
 // Renderizar la interfaz principal
@@ -28,7 +40,7 @@ function renderDatabaseManager() {
   const config = getDbConfig();
   const databases = getAllDatabases();
   
-  let html = `
+  const html = `
     <div class="db-manager-container">
       <div class="db-header">
         <h2><i class="fas fa-database"></i> Administrador de Bases de Datos</h2>
@@ -43,6 +55,7 @@ function renderDatabaseManager() {
         <button class="tab-btn active" data-tab="databases"><i class="fas fa-server"></i> Bases de Datos</button>
         <button class="tab-btn" data-tab="assignments"><i class="fas fa-link"></i> Asignaciones</button>
         <button class="tab-btn" data-tab="settings"><i class="fas fa-cog"></i> Configuración</button>
+        <button class="tab-btn" data-tab="mockdata"><i class="fas fa-file-code"></i> Datos Mock</button>
       </div>
       
       <div class="tab-content" id="databasesTab">
@@ -73,9 +86,16 @@ function renderDatabaseManager() {
           </div>
         </div>
       </div>
+      
+      <div class="tab-content hidden" id="mockdataTab">
+        <div class="mockdata-container">
+          <h3>Editar Datos Mock</h3>
+          <p class="text-muted">Edita los datos JSON que cada página consume.</p>
+          <div class="mock-files" id="mockFiles"></div>
+        </div>
+      </div>
     </div>
     
-    <!-- Modal -->
     <div class="modal" id="dbModal">
       <div class="modal-content">
         <div class="modal-header">
@@ -89,15 +109,30 @@ function renderDatabaseManager() {
         </div>
       </div>
     </div>
+    
+    <div class="modal" id="jsonEditorModal">
+      <div class="modal-content" style="max-width: 800px;">
+        <div class="modal-header">
+          <h3 id="jsonModalTitle">Editar JSON</h3>
+          <button class="modal-close" id="jsonModalClose">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div id="jsonEditorContainer"></div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" id="jsonModalCancel">Cancelar</button>
+          <button class="btn btn-primary" id="jsonModalSave">Guardar</button>
+        </div>
+      </div>
+    </div>
   `;
   
   document.getElementById('contentArea').innerHTML = html;
 }
 
-// Renderizar lista de bases de datos
 function renderDatabaseList(databases, defaultDbId) {
   if (databases.length === 0) {
-    return '<p class="text-muted">No hay bases de datos configuradas. <button class="btn btn-link" id="quickAddDb">Configurar una ahora</button></p>';
+    return '<p class="text-muted">No hay bases de datos configuradas.</p>';
   }
   
   return databases.map(db => {
@@ -123,7 +158,6 @@ function renderDatabaseList(databases, defaultDbId) {
             <div><strong>Host:</strong> ${db.host || 'N/A'}</div>
             <div><strong>Puerto:</strong> ${db.port || 'N/A'}</div>
             <div><strong>Base de datos:</strong> ${db.database || 'N/A'}</div>
-            <div><strong>Páginas:</strong> ${db.pages && db.pages.length > 0 ? db.pages.join(', ') : 'Ninguna'}</div>
           </div>
           <div class="db-status">
             <span class="status-indicator"></span>
@@ -135,11 +169,7 @@ function renderDatabaseList(databases, defaultDbId) {
   }).join('');
 }
 
-// Renderizar asignaciones de páginas
 function renderPageAssignments(pageMap, databases) {
-  const dbMap = {};
-  databases.forEach(db => { dbMap[db.id] = db; });
-  
   return AVAILABLE_PAGES.map(page => {
     const dbId = pageMap[page];
     return `
@@ -159,9 +189,54 @@ function renderPageAssignments(pageMap, databases) {
   }).join('');
 }
 
-// Configurar event listeners
+function renderMockFiles() {
+  const container = document.getElementById('mockFiles');
+  const mockData = JSON.parse(localStorage.getItem('pia_mock_data') || '{}');
+  
+  const html = AVAILABLE_JSON_FILES.map(f => {
+    const hasData = mockData[f.path] !== undefined;
+    const preview = hasData ? JSON.stringify(mockData[f.path]).substring(0, 100) + '...' : 'Usa datos originales';
+    
+    return `
+      <div class="mock-file-card" data-path="${f.path}">
+        <div class="mock-file-header">
+          <div class="mock-file-info">
+            <i class="fas fa-file-code"></i>
+            <div>
+              <strong>${f.name}</strong>
+              <span class="mock-file-type">${f.label}</span>
+            </div>
+          </div>
+          <div class="mock-file-actions">
+            <button class="btn btn-secondary edit-json-btn" data-path="${f.path}" title="Editar">
+              <i class="fas fa-pen"></i> Editar
+            </button>
+            <button class="btn btn-danger clear-json-btn" data-path="${f.path}" title="Restablecer">
+              <i class="fas fa-undo"></i> Restablecer
+            </button>
+          </div>
+        </div>
+        <div class="mock-file-preview">
+          <pre>${preview}</pre>
+        </div>
+      </div>
+    `;
+  }).join('');
+  
+  container.innerHTML = html;
+  
+  document.querySelectorAll('.edit-json-btn').forEach(btn => {
+    btn.addEventListener('click', () => openJsonEditor(btn.dataset.path));
+  });
+  
+  document.querySelectorAll('.clear-json-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (confirm('Restablecer a datos originales?')) clearMockData(btn.dataset.path);
+    });
+  });
+}
+
 function setupEventListeners() {
-  // Tabs
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -172,17 +247,10 @@ function setupEventListeners() {
     });
   });
   
-  // Añadir nueva BD
   document.getElementById('addNewDb').addEventListener('click', () => openDbModal());
-  if (document.getElementById('quickAddDb')) {
-    document.getElementById('quickAddDb').addEventListener('click', () => openDbModal());
-  }
-  
-  // Exportar/Importar
   document.getElementById('exportConfig').addEventListener('click', exportConfig);
   document.getElementById('importConfig').addEventListener('click', importConfig);
   
-  // Guardar por defecto
   document.getElementById('defaultDbSelect').addEventListener('change', (e) => {
     const dbId = e.target.value;
     if (dbId) {
@@ -192,7 +260,6 @@ function setupEventListeners() {
     }
   });
   
-  // Eventos delegados
   document.addEventListener('click', (e) => {
     if (e.target.closest('.edit-db')) {
       const dbId = e.target.closest('.edit-db').dataset.id;
@@ -208,31 +275,35 @@ function setupEventListeners() {
       const dbId = select.value;
       if (dbId) {
         assignDatabaseToPage(page, dbId);
-        showToast(`Asignación actualizada para ${page}`, 'success');
+        showToast('Asignación actualizada para ' + page, 'success');
       } else {
         removePageAssignment(page);
-        showToast(`Asignación removida para ${page}`, 'success');
+        showToast('Asignación removida para ' + page, 'success');
       }
     }
   });
   
-  // Modal
   document.getElementById('modalClose').addEventListener('click', closeModal);
   document.getElementById('modalCancel').addEventListener('click', closeModal);
   document.getElementById('modalSave').addEventListener('click', saveDbHandler);
   document.getElementById('dbModal').addEventListener('click', (e) => {
     if (e.target === e.currentTarget) closeModal();
   });
+  
+  document.getElementById('jsonModalClose').addEventListener('click', closeJsonModal);
+  document.getElementById('jsonModalCancel').addEventListener('click', closeJsonModal);
+  document.getElementById('jsonModalSave').addEventListener('click', saveJsonEditor);
+  document.getElementById('jsonEditorModal').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeJsonModal();
+  });
 }
 
-// Abrir modal
-let currentDbId = null;
 function openDbModal(dbId = null) {
   currentDbId = dbId;
   const databases = getAllDatabases();
   const db = dbId ? databases.find(d => d.id === dbId) : null;
   
-  let formHtml = `
+  const formHtml = `
     <form id="dbForm">
       <div class="form-group">
         <label for="dbName">Nombre *</label>
@@ -270,7 +341,6 @@ function openDbModal(dbId = null) {
   });
 }
 
-// Renderizar campos según tipo
 function renderDbFields(db) {
   const type = db ? db.type : 'postgresql';
   const typeInfo = DB_TYPES[type];
@@ -300,7 +370,6 @@ function renderDbFields(db) {
   }).join('');
 }
 
-// Guardar BD
 function saveDbHandler() {
   const dbData = {
     name: document.getElementById('dbName').value,
@@ -338,9 +407,8 @@ function saveDbHandler() {
   }
 }
 
-// Eliminar BD
 function deleteDbHandler(dbId) {
-  if (!confirm('¿Estás seguro de eliminar esta base de datos?')) return;
+  if (!confirm('Eliminar esta base de datos?')) return;
   try {
     deleteDatabase(dbId);
     showToast('Base de datos eliminada', 'success');
@@ -350,7 +418,6 @@ function deleteDbHandler(dbId) {
   }
 }
 
-// Exportar
 function exportConfig() {
   const config = exportDbConfig();
   const blob = new Blob([config], { type: 'application/json' });
@@ -363,7 +430,6 @@ function exportConfig() {
   showToast('Configuración exportada', 'success');
 }
 
-// Importar
 function importConfig() {
   const input = document.createElement('input');
   input.type = 'file';
@@ -377,7 +443,7 @@ function importConfig() {
         showToast('Configuración importada', 'success');
         renderDatabaseManager();
       } else {
-        showToast('Error al importar el archivo', 'error');
+        showToast('Error al importar', 'error');
       }
     };
     reader.readAsText(file);
@@ -385,10 +451,103 @@ function importConfig() {
   input.click();
 }
 
-// Cerrar modal
 function closeModal() {
   document.getElementById('dbModal').style.display = 'none';
   currentDbId = null;
+}
+
+// MOCK DATA FUNCTIONS
+
+function openJsonEditor(path) {
+  currentJsonPath = path;
+  const mockData = JSON.parse(localStorage.getItem('pia_mock_data') || '{}');
+  const currentData = mockData[path] || {};
+  const f = AVAILABLE_JSON_FILES.find(x => x.path === path);
+  
+  const html = `
+    <div class="json-editor">
+      <div class="form-group">
+        <label>Archivo: <strong>${f.name}</strong> (${f.label})</label>
+        <textarea id="jsonEditorTextarea" class="form-control" rows="15" style="font-family: monospace; white-space: pre;">${JSON.stringify(currentData, null, 2)}</textarea>
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" id="jsonUseOriginal" ${!mockData[path] ? 'checked' : ''} />
+        <label for="jsonUseOriginal" class="form-check-label">Usar datos originales</label>
+        <small class="text-muted">Si está marcado, se cargarán los datos del archivo original.</small>
+      </div>
+    </div>
+  `;
+  
+  document.getElementById('jsonModalTitle').textContent = 'Editar ' + f.name;
+  document.getElementById('jsonEditorContainer').innerHTML = html;
+  document.getElementById('jsonEditorModal').style.display = 'flex';
+}
+
+function saveJsonEditor() {
+  const textarea = document.getElementById('jsonEditorTextarea');
+  const useOriginal = document.getElementById('jsonUseOriginal').checked;
+  
+  const mockData = JSON.parse(localStorage.getItem('pia_mock_data') || '{}');
+  
+  if (useOriginal) {
+    delete mockData[currentJsonPath];
+  } else {
+    try {
+      mockData[currentJsonPath] = JSON.parse(textarea.value);
+    } catch (e) {
+      showToast('Error: JSON inválido', 'error');
+      return;
+    }
+  }
+  
+  localStorage.setItem('pia_mock_data', JSON.stringify(mockData));
+  
+  if (typeof updateMockData === 'function') {
+    updateMockData(currentJsonPath, mockData[currentJsonPath]);
+  }
+  
+  if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+    navigator.serviceWorker.controller.postMessage({
+      type: 'UPDATE_MOCK_DATA',
+      payload: { [currentJsonPath]: mockData[currentJsonPath] }
+    });
+  }
+  
+  closeJsonModal();
+  renderMockFiles();
+  showToast('Datos mock actualizados', 'success');
+}
+
+function clearMockData(path) {
+  const mockData = JSON.parse(localStorage.getItem('pia_mock_data') || '{}');
+  delete mockData[path];
+  localStorage.setItem('pia_mock_data', JSON.stringify(mockData));
+  
+  if (typeof updateMockData === 'function') {
+    updateMockData(path, undefined);
+  }
+  
+  if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+    navigator.serviceWorker.controller.postMessage({
+      type: 'UPDATE_MOCK_DATA',
+      payload: { [path]: undefined }
+    });
+  }
+  
+  renderMockFiles();
+  showToast('Datos restablecidos', 'success');
+}
+
+function closeJsonModal() {
+  document.getElementById('jsonEditorModal').style.display = 'none';
+  currentJsonPath = null;
+}
+
+function initMockDataTab() {
+  const tabBtn = document.querySelector('.tab-btn[data-tab="mockdata"]');
+  if (tabBtn) {
+    tabBtn.addEventListener('click', () => renderMockFiles());
+  }
 }
 
 // Toast
