@@ -2,24 +2,23 @@
 
 // Verificar si el navegador soporta Service Workers
 if ('serviceWorker' in navigator) {
-  // Ruta del Service Worker (debe estar en el mismo directorio o subdirectorio)
-  const swPath = '/admin/js/data-service-worker.js';
+  // Ruta del Service Worker (en la raíz para interceptar todos los paths)
+  const swPath = '/data-service-worker.js';
   
   // Registrar el Service Worker
   navigator.serviceWorker.register(swPath)
     .then((registration) => {
-      console.log('Data Service Worker registrado con éxito:', registration.scope);
+      console.log('Data Service Worker registrado:', registration.scope);
       
       // Escuchar mensajes del Service Worker
       navigator.serviceWorker.addEventListener('message', (event) => {
         if (event.data.type === 'MOCK_DATA_UPDATED') {
           console.log('Datos mock actualizados:', event.data.payload);
-          // Puedes actualizar la UI aquí si es necesario
         }
       });
     })
     .catch((error) => {
-      console.error('Error registrando Data Service Worker:', error);
+      console.error('Error registrando Service Worker:', error);
     });
   
   // Función para actualizar datos mock (usada desde el módulo administrativo)
@@ -32,11 +31,14 @@ if ('serviceWorker' in navigator) {
     } else {
       // Fallback: guardar en localStorage
       const mockData = JSON.parse(localStorage.getItem('pia_mock_data') || '{}');
-      mockData[path] = data;
+      if (data !== undefined) {
+        mockData[path] = data;
+      } else {
+        delete mockData[path];
+      }
       localStorage.setItem('pia_mock_data', JSON.stringify(mockData));
     }
   }
   
-  // Exponer función globalmente para que el módulo administrativo la use
+  // Exponer función globalmente
   window.updateMockData = updateMockData;
-}
